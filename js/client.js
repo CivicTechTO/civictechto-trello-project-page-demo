@@ -9,15 +9,11 @@ var app = new Vue({
   },
   methods: {
     fetchData: function () {
-      var xhr = new XMLHttpRequest()
-      var self = this
-      xhr.open('GET', 'https://trello.com/b/EVvNEGK5.json')
-      xhr.onload = function () {
-        var data = JSON.parse(xhr.responseText)
-        self.featuredCards = featuredCards(data)
-        console.log(self.featuredCards)
-      }
-      xhr.send()
+      vm = this
+      vm.$http.get('https://trello.com/b/EVvNEGK5.json')
+        .then(function (response) {
+          vm.featuredCards = featuredCards(response.data)
+        })
     }
   }
 })
