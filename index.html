@@ -22,8 +22,8 @@
             <p class="m-b-1">
               Lead: <a href="mailto:henrik@civictech.ca.">Henrik Bechmann</a>
             </p>
-            <p class="m-b-2">
-              Slack: <a href="https://civictechto.slack.com/archives/budgetpedia-gen">#budgetpedia-gen</a>
+            <p v-if="chatLink(card)" class="m-b-2">
+              Chat: <a :href="chatLink(card).url">{{chatLink(card).name | cleanAttachmentName}}</a>
             </p>
             <div>
               <a v-if="primaryLink(card)" class="btn red-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="primaryLink(card).url">

@@ -34,6 +34,11 @@ var app = new Vue({
       return card.attachments.filter((attachment) => {
         return attachment.name.toLowerCase().startsWith('secondary link:')
       })
+    },
+    chatLink: function (card) {
+      return card.attachments.filter((attachment) => {
+        return attachment.name.toLowerCase().startsWith('chat:')
+      }).pop()
     }
   },
   filters: {
@@ -44,6 +49,7 @@ var app = new Vue({
       value = value.replace(/^cover image:/i, '')
       value = value.replace(/^primary link:/i, '')
       value = value.replace(/^secondary link:/i, '')
+      value = value.replace(/^chat:/i, '')
       value.trim()
       return value
     }
