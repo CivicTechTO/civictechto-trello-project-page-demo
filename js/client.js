@@ -1,7 +1,11 @@
 Vue.prototype.$http = axios
+Vue.prototype.$last = function (item, list) {
+  return item == list[list.length - 1]
+}
 var app = new Vue({
   el: '#app',
   data: {
+    fullBoard: {},
     featuredCards: [],
   },
   created: function () {
@@ -12,6 +16,7 @@ var app = new Vue({
       vm = this
       vm.$http.get('https://trello.com/b/EVvNEGK5.json')
         .then(function (response) {
+          vm.fullBoard = response.data
           vm.featuredCards = featuredCards(response.data)
         })
     },
@@ -33,6 +38,11 @@ var app = new Vue({
     secondaryLinks: function (card) {
       return card.attachments.filter((attachment) => {
         return attachment.name.toLowerCase().startsWith('secondary link:')
+      })
+    },
+    members: function (card) {
+      return this.fullBoard.members.filter((member) => {
+        return card.idMembers.indexOf(member.id) > -1
       })
     },
     chatLink: function (card) {

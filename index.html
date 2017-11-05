@@ -20,7 +20,7 @@
               {{ card.desc }}
             </p>
             <p class="m-b-1">
-              Lead: <a href="mailto:henrik@civictech.ca.">Henrik Bechmann</a>
+              Leads: <span v-for="(member, index) in members(card)" class="member">{{ member.fullName }}<template v-if="index !== members(card).length - 1">, </template></span>
             </p>
             <p v-if="chatLink(card)" class="m-b-2">
               Chat: <a :href="chatLink(card).url">{{chatLink(card).name | cleanAttachmentName}}</a>
