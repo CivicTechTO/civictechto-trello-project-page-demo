@@ -22,9 +22,31 @@ var app = new Vue({
     },
     attributionAttachment: function (card) {
       return card.attachments.filter((attachment) => {
-        return attachment.name.toLowerCase().startsWith('image attribution:')
+        return attachment.name.toLowerCase().startsWith('cover image attribution:')
       }).pop()
-  }
+    },
+    primaryLink: function (card) {
+      return card.attachments.filter((attachment) => {
+        return attachment.name.toLowerCase().startsWith('primary link:')
+      }).pop()
+    },
+    secondaryLinks: function (card) {
+      return card.attachments.filter((attachment) => {
+        return attachment.name.toLowerCase().startsWith('secondary link:')
+      })
+    }
+  },
+  filters: {
+    cleanAttachmentName: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      value = value.replace(/^cover image attribution:/i, '')
+      value = value.replace(/^cover image:/i, '')
+      value = value.replace(/^primary link:/i, '')
+      value = value.replace(/^secondary link:/i, '')
+      value.trim()
+      return value
+    }
   }
 })
 

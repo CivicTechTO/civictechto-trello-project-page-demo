@@ -10,7 +10,7 @@
       <template v-for="card in featuredCards">
         <div class="clear">
           <div class="project-image">
-            <img v-if="coverAttachment(card)" class="size-thumbnail alignleft wp-image-566" :src="coverAttachment(card).url" :alt="coverAttachment(card).name" />
+            <img v-if="coverAttachment(card)" class="size-thumbnail alignleft wp-image-566" :src="coverAttachment(card).previews[3].url" :alt="coverAttachment(card).name | cleanAttachmentName" :title="coverAttachment(card).name | cleanAttachmentName" />
           </div>
           <div class="project-content">
             <h1>
@@ -26,16 +26,16 @@
               Slack: <a href="https://civictechto.slack.com/archives/budgetpedia-gen">#budgetpedia-gen</a>
             </p>
             <div>
-              <a class="btn red-btn btn-primary custom-button no-margin margin-r-1 m-b-1" href="http://budgetpedia.ca/">
-                View the Project
+              <a v-if="primaryLink(card)" class="btn red-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="primaryLink(card).url">
+                {{ primaryLink(card).name | cleanAttachmentName }}
               </a>
-              <a class="btn btn-primary custom-button green-btn no-margin m-b-1" href="https://drive.google.com/drive/u/0/folders/0B208oCU9D8OuSms5bEZxcnRLZzA">Contribute on GDrive</a> <a class="btn btn-primary custom-button green-btn no-margin m-b-1" href="https://github.com/CivicTechTO/budgetcommons-dev-frontend">Contribute on Github (frontend)</a> <a class="btn btn-primary custom-button green-btn no-margin m-b-1" href="https://github.com/CivicTechTO/budgetcommons-dev-backend">
-                Contribute on Github (backend)
+              <a v-for="link in secondaryLinks(card)" class="btn btn-primary custom-button green-btn no-margin m-b-1" :href="link.url">
+                {{ link.name | cleanAttachmentName }}
               </a>
             </div>
             <div>
               <a v-if="attributionAttachment(card)" class="attribution" :href="attributionAttachment(card).url">
-                {{ attributionAttachment(card).name }}
+                {{ attributionAttachment(card).name | cleanAttachmentName }}
               </a>
             </div>
           </div>
