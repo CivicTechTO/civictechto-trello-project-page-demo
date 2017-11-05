@@ -14,7 +14,17 @@ var app = new Vue({
         .then(function (response) {
           vm.featuredCards = featuredCards(response.data)
         })
-    }
+    },
+    coverAttachment: function (card) {
+      return card.attachments.filter(function (attachment) {
+        return attachment.id == card.idAttachmentCover
+      }).pop()
+    },
+    attributionAttachment: function (card) {
+      return card.attachments.filter((attachment) => {
+        return attachment.name.toLowerCase().startsWith('image attribution:')
+      }).pop()
+  }
   }
 })
 

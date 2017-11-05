@@ -10,7 +10,7 @@
       <template v-for="card in featuredCards">
         <div class="clear">
           <div class="project-image">
-            <img class="size-thumbnail alignleft wp-image-566" :src="card.attachments[0].url" :alt="card.attachments[0].name" />
+            <img v-if="coverAttachment(card)" class="size-thumbnail alignleft wp-image-566" :src="coverAttachment(card).url" :alt="coverAttachment(card).name" />
           </div>
           <div class="project-content">
             <h1>
@@ -34,8 +34,8 @@
               </a>
             </div>
             <div>
-              <a class="attribution" href="https://www.flickr.com/photos/thomashawk/5405835151/">
-                {{ card.attachments[0].name }}
+              <a v-if="attributionAttachment(card)" class="attribution" :href="attributionAttachment(card).url">
+                {{ attributionAttachment(card).name }}
               </a>
             </div>
           </div>
