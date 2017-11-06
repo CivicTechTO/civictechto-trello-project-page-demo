@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css" />
     <script src="//unpkg.com/vue"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.2/purify.min.js"></script>
   </head>
   <body>
     <a class="github-fork-ribbon" href="https://github.com/CivicTechTO/civictechto-trello-project-page-demo" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
@@ -39,8 +41,7 @@
                           <h1>
                             {{ card.name }} <span v-if="projectStageLabel(card)" class="project-phase">{{ projectStageLabel(card).normalized }}</span>
                           </h1>
-                          <p class="m-b-1 project-copy">
-                            {{ card.desc }}
+                          <p v-html="$options.filters.markdownify(card.desc)" class="m-b-1 project-copy">
                           </p>
                           <p class="m-b-1">
                             Leads: <span v-for="member in members(card)" class="member">{{ member.fullName }}<template v-if="!$last(member, members(card))">, </template></span>

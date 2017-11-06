@@ -68,6 +68,9 @@ var app = new Vue({
     }
   },
   filters: {
+    markdownify: function (value) {
+      return DOMPurify.sanitize(marked(value))
+    },
     cleanAttachmentName: function (value) {
       if (!value) return ''
       value = value.toString()
