@@ -32,40 +32,47 @@
                       <h3 class="project-page-header no-margin">Listed below are a snippet of the projects you can contribute to.</h3>
                     </div>
                     <p>&nbsp;</p>
-                    <template v-for="card in featuredCards">
-                      <div class="clear">
-                        <div class="project-image">
-                          <img v-if="coverAttachment(card)" class="size-thumbnail alignleft wp-image-566" :src="coverAttachment(card).previews[3].url" :alt="coverAttachment(card).name | cleanAttachmentName" :title="coverAttachment(card).name | cleanAttachmentName" />
-                        </div>
-                        <div class="project-content">
-                          <h1>
-                            {{ card.name }} <span v-if="projectStageLabel(card)" class="project-phase">{{ projectStageLabel(card).normalized }}</span>
-                          </h1>
-                          <p v-html="$options.filters.markdownify(card.desc)" class="m-b-1 project-copy">
-                          </p>
-                          <p class="m-b-1">
-                            Leads: <span v-for="member in members(card)" class="member">{{ member.fullName }}<template v-if="!$last(member, members(card))">, </template></span>
-                          </p>
-                          <p v-if="chatLink(card)" class="m-b-2">
-                            Chat: <a :href="chatLink(card).url">{{chatLink(card).name | cleanAttachmentName}}</a>
-                          </p>
-                          <div>
-                            <a v-if="primaryLink(card)" class="btn red-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="primaryLink(card).url">
-                              {{ primaryLink(card).name | cleanAttachmentName }}
-                            </a>
-                            <a v-for="link in secondaryLinks(card)" class="btn green-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="link.url">
-                              {{ link.name | cleanAttachmentName }}
-                            </a>
+                    <template v-if="featuredCards.length > 0">
+                      <template v-for="card in featuredCards">
+                        <div class="clear">
+                          <div class="project-image">
+                            <img v-if="coverAttachment(card)" class="size-thumbnail alignleft wp-image-566" :src="coverAttachment(card).previews[3].url" :alt="coverAttachment(card).name | cleanAttachmentName" :title="coverAttachment(card).name | cleanAttachmentName" />
                           </div>
-                          <div>
-                            <a v-if="attributionAttachment(card)" class="attribution" :href="attributionAttachment(card).url">
-                              {{ attributionAttachment(card).name | cleanAttachmentName }}
-                            </a>
+                          <div class="project-content">
+                            <h1>
+                              {{ card.name }} <span v-if="projectStageLabel(card)" class="project-phase">{{ projectStageLabel(card).normalized }}</span>
+                            </h1>
+                            <p v-html="$options.filters.markdownify(card.desc)" class="m-b-1 project-copy">
+                            </p>
+                            <p class="m-b-1">
+                              Leads: <span v-for="member in members(card)" class="member">{{ member.fullName }}<template v-if="!$last(member, members(card))">, </template></span>
+                            </p>
+                            <p v-if="chatLink(card)" class="m-b-2">
+                              Chat: <a :href="chatLink(card).url">{{chatLink(card).name | cleanAttachmentName}}</a>
+                            </p>
+                            <div>
+                              <a v-if="primaryLink(card)" class="btn red-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="primaryLink(card).url">
+                                {{ primaryLink(card).name | cleanAttachmentName }}
+                              </a>
+                              <a v-for="link in secondaryLinks(card)" class="btn green-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="link.url">
+                                {{ link.name | cleanAttachmentName }}
+                              </a>
+                            </div>
+                            <div>
+                              <a v-if="attributionAttachment(card)" class="attribution" :href="attributionAttachment(card).url">
+                                {{ attributionAttachment(card).name | cleanAttachmentName }}
+                              </a>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <hr class="spacious" />
+                        <hr class="spacious" />
+                      </template>
                     </template>
+                    <template v-else><h1>Loading...</h1></template>
+                    <div style="border: 2px solid #ccc; padding: 30px; margin-bottom: 40px;">
+                      <h2>Interested in contributing to one of the groups?</h2>
+                      <h2 style="margin-bottom: 0;"><a href="http://www.meetup.com/Civic-Tech-Toronto/">Come to one of our hacknights to meet the project team.</a></h2>
+                    </div>
                   </div>
                 </article>
               </main>
