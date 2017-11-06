@@ -4,6 +4,16 @@ The purpose of this repo is to show how a [static website hosted on
 GitHub Pages][website] could be backed by a [**Hacknight Projects** Trello
 board][board].
 
+## How it Works
+
+The page is automatically generated from Trello "cards" that each
+represent a project. Tagging a card with the "Website Featured" label
+automatically renders it on the webpage. By formatting attachments in
+specific ways (made easier by [copying][howto-copy] a template card) a
+new project can be added and promoted to website -- Slack channels,
+project header images, project leads, and various other links are
+rendered from the Trello data.
+
 ## Why?
 
 Benefits of this approach include:
@@ -33,3 +43,4 @@ To contribute to this project, just submit a pull request to the
 
    [website]: https://civictechto.github.io/civictechto-trello-project-page-demo/
    [board]: https://trello.com/b/EVvNEGK5/hacknight-projects
+   [howto-copy]: http://help.trello.com/article/802-copying-cards-lists-or-boards
