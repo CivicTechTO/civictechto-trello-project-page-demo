@@ -2,48 +2,81 @@
 <html lang="en">
   <head>
     <title>Bootstrap 101 Template</title>
+    <link rel='stylesheet' id='bootstrap-css'  href='http://civictech.ca/wp-content/plugins/easy-bootstrap-shortcodes/styles/bootstrap.min.css?ver=4.8.3' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-fa-icon-css'  href='http://civictech.ca/wp-content/plugins/easy-bootstrap-shortcodes/styles/font-awesome.min.css?ver=4.8.3' type='text/css' media='all' />
+    <link rel='stylesheet' id='math-captcha-frontend-css'  href='http://civictech.ca/wp-content/plugins/wp-math-captcha/css/frontend.css?ver=4.8.3' type='text/css' media='all' />
+    <link rel='stylesheet' id='zerif_font-css'  href='//fonts.googleapis.com/css?family=Lato%3A100%2C300%2C400%2C700%2C400italic%7CMontserrat%3A700%7CHomemade+Apple&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+    <link rel='stylesheet' id='zerif_font_all-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3A400%2C300%2C300italic%2C400italic%2C600italic%2C600%2C700%2C700italic%2C800%2C800italic&#038;ver=4.8.3' type='text/css' media='all' />
+    <link rel='stylesheet' id='zerif_bootstrap_style-css'  href='http://civictech.ca/wp-content/themes/zerif-lite/css/bootstrap.css?ver=4.8.3' type='text/css' media='all' />
+    <link rel='stylesheet' id='zerif_fontawesome-css'  href='http://civictech.ca/wp-content/themes/zerif-lite/css/font-awesome.min.css?ver=v1' type='text/css' media='all' />
+    <link rel='stylesheet' id='zerif_pixeden_style-css'  href='http://civictech.ca/wp-content/themes/zerif-lite/css/pixeden-icons.css?ver=v1' type='text/css' media='all' />
+    <link rel='stylesheet' id='zerif_style-css'  href='http://civictech.ca/wp-content/themes/zerif-lite/style.css?ver=v1' type='text/css' media='all' />
+    <link rel='stylesheet' id='zerif_responsive_style-css'  href='http://civictech.ca/wp-content/themes/zerif-lite/css/responsive.css?ver=v1' type='text/css' media='all' />
+    <link rel='stylesheet' id='ebs_dynamic_css-css'  href='http://civictech.ca/wp-content/plugins/easy-bootstrap-shortcodes/styles/ebs_dynamic_css.php?ver=4.8.3' type='text/css' media='all' />
     <script src="//unpkg.com/vue"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
   </head>
   <body>
     <div id="app">
-      <template v-for="card in featuredCards">
-        <div class="clear">
-          <div class="project-image">
-            <img v-if="coverAttachment(card)" class="size-thumbnail alignleft wp-image-566" :src="coverAttachment(card).previews[3].url" :alt="coverAttachment(card).name | cleanAttachmentName" :title="coverAttachment(card).name | cleanAttachmentName" />
-          </div>
-          <div class="project-content">
-            <h1>
-              {{ card.name }} <span class="project-phase">Alpha</span>
-            </h1>
-            <p class="m-b-1 project-copy">
-              {{ card.desc }}
-            </p>
-            <p class="m-b-1">
-              Leads: <span v-for="member in members(card)" class="member">{{ member.fullName }}<template v-if="!$last(member, members(card))">, </template></span>
-            </p>
-            <p v-if="chatLink(card)" class="m-b-2">
-              Chat: <a :href="chatLink(card).url">{{chatLink(card).name | cleanAttachmentName}}</a>
-            </p>
-            <div>
-              <a v-if="primaryLink(card)" class="btn red-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="primaryLink(card).url">
-                {{ primaryLink(card).name | cleanAttachmentName }}
-              </a>
-              <a v-for="link in secondaryLinks(card)" class="btn btn-primary custom-button green-btn no-margin m-b-1" :href="link.url">
-                {{ link.name | cleanAttachmentName }}
-              </a>
-            </div>
-            <div>
-              <a v-if="attributionAttachment(card)" class="attribution" :href="attributionAttachment(card).url">
-                {{ attributionAttachment(card).name | cleanAttachmentName }}
-              </a>
+      <div id="content" class="site-content">
+        <div class="container">
+          <div class="content-left-wrap col-md-12">
+            <div id="primary" class="content-area">
+              <main id="main" class="site-main" role="main">
+                <article id="post-500" class="post-500 page type-page status-publish hentry">
+                  <header class="entry-header">
+                    <h1 class="entry-title">Projects</h1>
+                  </header>
+                  <div class="entry-content">
+                    <div style="border: 2px solid #ccc; padding: 30px;">
+                      <h3 class="project-page-header">Every Tuesday evening, citizens meet at Civic Tech Toronto to collaborate on projects aimed at finding solutions to civic challenges.</h3>
+                      <h3 class="project-page-header no-margin">Listed below are a snippet of the projects you can contribute to.</h3>
+                    </div>
+                    <p>&nbsp;</p>
+                    <template v-for="card in featuredCards">
+                      <div class="clear">
+                        <div class="project-image">
+                          <img v-if="coverAttachment(card)" class="size-thumbnail alignleft wp-image-566" :src="coverAttachment(card).previews[3].url" :alt="coverAttachment(card).name | cleanAttachmentName" :title="coverAttachment(card).name | cleanAttachmentName" />
+                        </div>
+                        <div class="project-content">
+                          <h1>
+                            {{ card.name }} <span v-if="projectStageLabel(card)" class="project-phase">{{ projectStageLabel(card).normalized }}</span>
+                          </h1>
+                          <p class="m-b-1 project-copy">
+                            {{ card.desc }}
+                          </p>
+                          <p class="m-b-1">
+                            Leads: <span v-for="member in members(card)" class="member">{{ member.fullName }}<template v-if="!$last(member, members(card))">, </template></span>
+                          </p>
+                          <p v-if="chatLink(card)" class="m-b-2">
+                            Chat: <a :href="chatLink(card).url">{{chatLink(card).name | cleanAttachmentName}}</a>
+                          </p>
+                          <div>
+                            <a v-if="primaryLink(card)" class="btn red-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="primaryLink(card).url">
+                              {{ primaryLink(card).name | cleanAttachmentName }}
+                            </a>
+                            <a v-for="link in secondaryLinks(card)" class="btn green-btn btn-primary custom-button no-margin margin-r-1 m-b-1" :href="link.url">
+                              {{ link.name | cleanAttachmentName }}
+                            </a>
+                          </div>
+                          <div>
+                            <a v-if="attributionAttachment(card)" class="attribution" :href="attributionAttachment(card).url">
+                              {{ attributionAttachment(card).name | cleanAttachmentName }}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="spacious" />
+                    </template>
+                  </div>
+                </article>
+              </main>
             </div>
           </div>
         </div>
-        <hr class="spacious" />
-      </template>
-    </div>
+      </div>
 
+    </div>
     <script src="js/client.js"></script>
   </body>
 </html>

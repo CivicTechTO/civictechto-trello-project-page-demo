@@ -11,6 +11,17 @@ var app = new Vue({
   created: function () {
     this.fetchData()
   },
+  computed: {
+    stageLabels: function() {
+      var labels = this.fullBoard.labels.filter((label) => {
+        return label.name.match(/^\d -/)
+      })
+      labels.forEach((label) => {
+        label.normalized = label.name.replace(/^\d - /, '')
+      })
+      return labels
+    }
+  },
   methods: {
     fetchData: function () {
       vm = this
@@ -44,6 +55,11 @@ var app = new Vue({
       return this.fullBoard.members.filter((member) => {
         return card.idMembers.indexOf(member.id) > -1
       })
+    },
+    projectStageLabel: function (card) {
+      return this.stageLabels.filter((label) => {
+        return card.idLabels.indexOf(label.id) > -1
+      }).pop()
     },
     chatLink: function (card) {
       return card.attachments.filter((attachment) => {
